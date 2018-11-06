@@ -20,7 +20,7 @@ def list_generator(*args):
 			
 			return 
 
-def name_and_price():
+def generate_card_details():
 	for x in card_list:
 		insert_dict = {}
 		card = scrython.cards.Named(fuzzy=x)
@@ -252,16 +252,24 @@ def name_and_price():
 		post_id = posts.insert_one(insert_dict).inserted_id
 
 
-
-	# total = 0
-	# for num in  total_price:
-	# 	total = num + total
-	# total = ceil(total * 100) / 100.0	
-	# print(f"Your collection is worth ${total} USD")
+def price_checker():
+	total_price = 0
+	for x in card_list:
+		card = scrython.cards.Named(fuzzy=x)
+		card_value = float(card.currency("usd"))
+		print(f"{card.name()} - ${card_value}")
+		total_price += card_value
+		time.sleep(.1)
+	total_price = ceil(total_price * 100) / 100.0	
+	print(f"Total value of cards entered: ${total_price}")
 
 if __name__ == "__main__":
 	
 	list_generator()
+	init_price_checker = input("Would you like to enter these card(s) into MongoDB? (type y or n)")
+	if init_price_checker == "y" or init_price_checker == "Y":
+		generate_card_details()
+	else:	
+		price_checker()
 	# print("Here is a current list of your cards: ")
 	# print(card_list)
-	name_and_price()
