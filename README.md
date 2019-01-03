@@ -6,3 +6,4 @@ Goals:
 - ~~Store cards in a local DB (using MongoDB)~~
 - ~~Give users the option to upload their card details into the cards collection~~
 - Enable functionality to search cards by keyword (like in MTG Arena)
+- Build a basic web application to submit and filther through cards (Flask)
